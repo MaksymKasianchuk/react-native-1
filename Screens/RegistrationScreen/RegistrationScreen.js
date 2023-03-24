@@ -26,79 +26,88 @@ const RegistrationScreen = () => {
     const [isKeyboardShown, setIsKeyboardShown] = useState(false);
     const [state, setState] = useState(initState);
 
-    const submitHandler = () => {
+    const hideKeyboard = () => {
         setIsKeyboardShown(false);
-        console.log(state);
         Keyboard.dismiss();
+    };
+
+    const submitHandler = () => {
+        hideKeyboard();
+        console.log(state);
         setState(initState);
     }
 
     return (
-        <View style={styles.formWrap}>
-            <View style={styles.form}> 
-                <View style={{
-                    ...styles.formTop,
-                    marginBottom: isKeyboardShown ? 30 : 40,
-                }}>
-                    <View>
-                        {/* <Image source={require('')} /> */}
-                    </View>
-                
-                    <Text style={styles.title}>Registration</Text>
-                   
-                    <TextInput 
-                        onFocus={() => setIsKeyboardShown(true)}
-                        onChangeText={(value) => {
-                            setState((prevState) => ({ ...prevState, login: value }));
-                        }}
-                        placeholder='Login'
-                        placeholderTextColor='#DDDDDD'
-                        value={state.login}
-                        style={styles.input}
-                    />
-                   
-                    <TextInput 
-                        onFocus={() => setIsKeyboardShown(true)}
-                        onChangeText={(value) => {
-                            setState((prevState) => ({ ...prevState, mail: value }));
-                        }}
-                        placeholder='Email'
-                        placeholderTextColor='#DDDDDD'
-                        value={state.mail}
-                        style={styles.input}
-                    />
-                   
-                  
-                    <TextInput 
-                        onFocus={() => setIsKeyboardShown(true)}
-                        onChangeText={(value) => {
-                            setState((prevState) => ({ ...prevState, password: value }));
-                        }}
-                        placeholder='Password'
-                        placeholderTextColor='#DDDDDD'
-                        value={state.password}
-                        secureTextEntry={true}
-                        style={styles.input}
-                    />
+        <TouchableWithoutFeedback onPress={hideKeyboard}>
+            <KeyboardAvoidingView 
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                style={{flex: 1}}
+            >
+                <View style={styles.formWrap}>
+                    <View style={{
+                        ...styles.form,
+                        paddingBottom: isKeyboardShown ? 10 : 60,
+                    }}> 
                     
-                </View>
+                        <View>
+                            {/* <Image source={require('')} /> */}
+                        </View>
+                        
+                        <Text style={styles.title}>Registration</Text>
+                        
+                        <TextInput 
+                            onFocus={() => setIsKeyboardShown(true)}
+                            onChangeText={(value) => {
+                                setState((prevState) => ({ ...prevState, login: value }));
+                            }}
+                            placeholder='Login'
+                            placeholderTextColor='#DDDDDD'
+                            value={state.login}
+                            style={styles.input}
+                        />
+                        
+                        <TextInput 
+                            onFocus={() => setIsKeyboardShown(true)}
+                            onChangeText={(value) => {
+                                setState((prevState) => ({ ...prevState, mail: value }));
+                            }}
+                            placeholder='Email'
+                            placeholderTextColor='#DDDDDD'
+                            value={state.mail}
+                            style={styles.input}
+                        />
+                        
+                        
+                        <TextInput 
+                            onFocus={() => setIsKeyboardShown(true)}
+                            onChangeText={(value) => {
+                                setState((prevState) => ({ ...prevState, password: value }));
+                            }}
+                            placeholder='Password'
+                            placeholderTextColor='#DDDDDD'
+                            value={state.password}
+                            secureTextEntry={true}
+                            style={styles.input}
+                        />
 
-                <TouchableOpacity 
-                    activeOpacity={0.8}
-                    style={styles.primButton}
-                    onPress={submitHandler}
-                >
-                    <Text style={styles.buttonTxt}>Sign up</Text>
-                </TouchableOpacity>
+                        <TouchableOpacity 
+                            activeOpacity={0.8}
+                            style={styles.primButton}
+                            onPress={submitHandler}
+                        >
+                            <Text style={styles.buttonTxt}>Sign up</Text>
+                        </TouchableOpacity>
 
-                <TouchableOpacity 
-                    activeOpacity={0.8}
-                    style={styles.secButton}
-                >
-                    <Text>Already have an account? Sign in</Text>
-                </TouchableOpacity>
-            </View>
-        </View> 
+                        <TouchableOpacity 
+                            activeOpacity={0.8}
+                            style={styles.secButton}
+                        >
+                            <Text>Already have an account? Sign in</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View> 
+            </KeyboardAvoidingView>
+        </TouchableWithoutFeedback>
     );
 }
 
@@ -115,9 +124,6 @@ const styles = StyleSheet.create({
         paddingVertical: 60,
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
-    },
-    formTop: {
-
     },
     title: {
         textAlign: 'center',
@@ -143,6 +149,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 16,
         backgroundColor: '#FF6C00',
+        marginTop: 40,
     },
     secButton: {
         marginTop: 10,
