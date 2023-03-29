@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { regStyles } from './RegistrationScreenStyles';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { 
     Text,
     View,
@@ -21,6 +23,7 @@ const initState = {
 const RegistrationScreen = () => {
     const [isKeyboardShown, setIsKeyboardShown] = useState(false);
     const [state, setState] = useState(initState);
+    const [isImgLoaded, setIsImgLoaded] = useState(false);
    
     const hideKeyboard = () => {
         setIsKeyboardShown(false);
@@ -33,6 +36,7 @@ const RegistrationScreen = () => {
         setState(initState);
     }
 
+    const userImg = isImgLoaded ? require("../../assets/user.png") : require("../../assets/emptyUser.png");
     return (
         <TouchableWithoutFeedback onPress={hideKeyboard}>
             <KeyboardAvoidingView 
@@ -45,8 +49,22 @@ const RegistrationScreen = () => {
                         paddingBottom: isKeyboardShown ? 10 : 60,
                     }}> 
                     
-                        <View>
-                            <Image source={require('../../assets/user.png')} />
+                        <View style={regStyles.userImgWrap} >
+                            <Image style={regStyles.userImg} source={userImg} />
+                            
+                            <TouchableOpacity 
+                                activeOpacity={0.8}
+                                style={{
+                                    ...regStyles.imgSwitch,
+                                    borderColor: isImgLoaded ? "#BDBDBD" : "#FF6C00",
+                                }}
+                                onPress={() => setIsImgLoaded((prevState) => !prevState)}
+                            >
+                                <FontAwesomeIcon 
+                                    style={{color: isImgLoaded ? "#BDBDBD" : "#FF6C00"}} 
+                                    icon={ isImgLoaded ? faXmark : faPlus } 
+                                />
+                            </TouchableOpacity>
                         </View>
                         
                         <Text style={regStyles.title}>Registration</Text>

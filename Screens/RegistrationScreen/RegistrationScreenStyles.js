@@ -6,10 +6,12 @@ export const regStyles = StyleSheet.create({
     },
     form: {
         backgroundColor: '#FFFFFF',
+        paddingTop: 90,
+        paddingBottom: 60,
         paddingHorizontal: 16,
-        paddingVertical: 60,
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
+        position: 'relative'
     },
     title: {
         fontFamily: 'Roboto-Bold',
@@ -51,4 +53,32 @@ export const regStyles = StyleSheet.create({
         fontSize: 16,
         lineHeight: 19,
     },
+    userImgWrap: {
+        position: 'absolute',
+        top: 0,
+        left: '50%',
+        transform: [{translateX: -45}, {translateY: -60}],
+    },
+    userImg: {
+        width: 120,
+        height: 120,
+        borderRadius: 16,
+        overflow: 'hidden',
+        backgroundColor: '#F6F6F6'
+    },
+    imgSwitch: {
+        borderRadius: 100,
+        position: 'absolute',
+        bottom: 20,
+        right: 0,
+        transform: [{translateX: 12}],
+        backgroundColor: '#ffffff',
+        borderWidth: 1,
+        borderStyle: 'solid',
+        width: 25,
+        height: 25,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+   
 });
