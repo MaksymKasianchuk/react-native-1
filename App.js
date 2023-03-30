@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { StyleSheet, View, ImageBackground,  Dimensions } from 'react-native';
-import RegistrationScreen from './Screens/RegistrationScreen';
+import { StyleSheet, View, ImageBackground, ScrollView, Dimensions } from 'react-native';
+// import RegistrationScreen from './Screens/RegistrationScreen';
+import LoginScreen from "./Screens/LoginScreen";
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
@@ -38,7 +39,8 @@ export default function App() {
         style={styles.imageBg}
         source={require("./assets/photo_bg.png")}
       >
-        <RegistrationScreen />
+        {/* <RegistrationScreen /> */}
+        <LoginScreen />
       </ImageBackground>
     </View>
   );
