@@ -11,6 +11,7 @@ import {
     KeyboardAvoidingView,
     Keyboard,
     TouchableWithoutFeedback,
+    ImageBackground,
 } from 'react-native';
 
 const initState = {
@@ -18,7 +19,7 @@ const initState = {
     password: '',
 };
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
     const [isKeyboardShown, setIsKeyboardShown] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [state, setState] = useState(initState);
@@ -35,75 +36,81 @@ const LoginScreen = () => {
     }
 
     return (
-        <TouchableWithoutFeedback onPress={hideKeyboard}>
-            <KeyboardAvoidingView 
-                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-                style={{flex: 1}}
+        <ImageBackground 
+                style={logStyles.imageBg}
+                source={require("../../assets/photo_bg.png")}
             >
-                <View style={logStyles.formWrap}>
-                    <View style={{
-                        ...logStyles.form,
-                        paddingBottom: isKeyboardShown ? 10 : 60,
-                    }}> 
-                        
-                        <Text style={logStyles.title}>Log in</Text>
-                        
-                        <TextInput 
-                            onFocus={() => setIsKeyboardShown(true)}
-                            onChangeText={(value) => {
-                                setState((prevState) => ({ ...prevState, mail: value }));
-                            }}
-                            placeholder='Email'
-                            placeholderTextColor='#DDDDDD'
-                            value={state.mail}
-                            style={logStyles.input}
-                        />
-                        
-                        <View style={logStyles.passwordInpWrap}>
-                            <TextInput 
-                                onFocus={() => setIsKeyboardShown(true)}
-                                onChangeText={(value) => {
-                                    setState((prevState) => ({ ...prevState, password: value }));
-                                }}
-                                placeholder='Password'
-                                placeholderTextColor='#DDDDDD'
-                                value={state.password}
-                                secureTextEntry={!showPassword}
-                                style={{
-                                    ...logStyles.input,
-                                    ...logStyles.passwordInp
-                                }}
-                            />
-                            <TouchableOpacity 
-                                activeOpacity={0.8}
-                                style={logStyles.showPasswBtn}
-                                onPress={() => setShowPassword((prevState) => !prevState)}
-                            >
-                                <FontAwesomeIcon 
-                                    style={logStyles.showPasswBtnSvg} 
-                                    icon={ showPassword ? faEyeSlash : faEye } 
+                <TouchableWithoutFeedback onPress={hideKeyboard}>
+                    <KeyboardAvoidingView 
+                        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                        style={{flex: 1}}
+                    >
+                        <View style={logStyles.formWrap}>
+                            <View style={{
+                                ...logStyles.form,
+                                paddingBottom: isKeyboardShown ? 10 : 60,
+                            }}> 
+                                
+                                <Text style={logStyles.title}>Log in</Text>
+                                
+                                <TextInput 
+                                    onFocus={() => setIsKeyboardShown(true)}
+                                    onChangeText={(value) => {
+                                        setState((prevState) => ({ ...prevState, mail: value }));
+                                    }}
+                                    placeholder='Email'
+                                    placeholderTextColor='#DDDDDD'
+                                    value={state.mail}
+                                    style={logStyles.input}
                                 />
-                            </TouchableOpacity>
-                        </View>
+                                
+                                <View style={logStyles.passwordInpWrap}>
+                                    <TextInput 
+                                        onFocus={() => setIsKeyboardShown(true)}
+                                        onChangeText={(value) => {
+                                            setState((prevState) => ({ ...prevState, password: value }));
+                                        }}
+                                        placeholder='Password'
+                                        placeholderTextColor='#DDDDDD'
+                                        value={state.password}
+                                        secureTextEntry={!showPassword}
+                                        style={{
+                                            ...logStyles.input,
+                                            ...logStyles.passwordInp
+                                        }}
+                                    />
+                                    <TouchableOpacity 
+                                        activeOpacity={0.8}
+                                        style={logStyles.showPasswBtn}
+                                        onPress={() => setShowPassword((prevState) => !prevState)}
+                                    >
+                                        <FontAwesomeIcon 
+                                            style={logStyles.showPasswBtnSvg} 
+                                            icon={ showPassword ? faEyeSlash : faEye } 
+                                        />
+                                    </TouchableOpacity>
+                                </View>
 
-                        <TouchableOpacity 
-                            activeOpacity={0.8}
-                            style={logStyles.primButton}
-                            onPress={submitHandler}
-                        >
-                            <Text style={logStyles.buttonTxt}>Sign in</Text>
-                        </TouchableOpacity>
+                                <TouchableOpacity 
+                                    activeOpacity={0.8}
+                                    style={logStyles.primButton}
+                                    onPress={submitHandler}
+                                >
+                                    <Text style={logStyles.buttonTxt}>Sign in</Text>
+                                </TouchableOpacity>
 
-                        <TouchableOpacity 
-                            activeOpacity={0.8}
-                            style={logStyles.secButton}
-                        >
-                            <Text>Don't have an account? Register</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View> 
-            </KeyboardAvoidingView>
-        </TouchableWithoutFeedback>
+                                <TouchableOpacity 
+                                    activeOpacity={0.8}
+                                    style={logStyles.secButton}
+                                    onPress={() => navigation.navigate("Registration")}
+                                >
+                                    <Text>Don't have an account? Register</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View> 
+                    </KeyboardAvoidingView>
+                </TouchableWithoutFeedback>
+        </ImageBackground>
     );
 }
 

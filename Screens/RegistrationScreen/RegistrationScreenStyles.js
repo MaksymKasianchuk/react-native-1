@@ -1,5 +1,10 @@
 import { StyleSheet } from 'react-native';
 export const regStyles = StyleSheet.create({
+    imageBg: {
+        flex: 1,
+        justifyContent: 'center',
+        resizeMode: "cover",
+    },
     formWrap: {
         flex: 1,
         justifyContent: "flex-end",
