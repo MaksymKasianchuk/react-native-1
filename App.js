@@ -3,12 +3,8 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { StyleSheet, View } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 
-import RegistrationScreen from "./Screens/RegistrationScreen";
-import LoginScreen from "./Screens/LoginScreen";
-
-const AuthStack = createStackNavigator();
+import { useRoute } from './hooks';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -16,6 +12,8 @@ export default function App() {
     "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
     "Roboto-Bold": require("./assets/fonts/Roboto-Bold.ttf"),
   });
+
+  const routing = useRoute({});
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
@@ -30,22 +28,7 @@ export default function App() {
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
       <NavigationContainer>
-        <AuthStack.Navigator>
-          <AuthStack.Screen 
-            options={{
-              headerShown: false,
-            }} 
-            name="Registration" 
-            component={RegistrationScreen} 
-          />
-          <AuthStack.Screen 
-            options={{
-              headerShown: false,
-            }} 
-            name="Login" 
-            component={LoginScreen} 
-          />
-        </AuthStack.Navigator>
+        { routing }
       </NavigationContainer>
     </View>
   );

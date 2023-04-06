@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { logStyles } from './LoginScreenStyles';
+import { regStyles } from './RegistrationScreenStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faXmark, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { 
     Text,
     View,
     TextInput,
     TouchableOpacity,
+    Image,
     Platform,
     KeyboardAvoidingView,
     Keyboard,
@@ -15,12 +16,14 @@ import {
 } from 'react-native';
 
 const initState = {
+    login: '',
     mail: '',
     password: '',
 };
 
-const LoginScreen = ({ navigation }) => {
+const RegistrationScreen = ({ navigation }) => {
     const [isKeyboardShown, setIsKeyboardShown] = useState(false);
+    const [isImgLoaded, setIsImgLoaded] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [state, setState] = useState(initState);
 
@@ -35,23 +38,53 @@ const LoginScreen = ({ navigation }) => {
         setState(initState);
     }
 
+    const userImg = isImgLoaded ? require("../../../assets/user.png") : require("../../../assets/emptyUser.png");
     return (
         <ImageBackground 
-                style={logStyles.imageBg}
-                source={require("../../assets/photo_bg.png")}
-            >
-                <TouchableWithoutFeedback onPress={hideKeyboard}>
+        style={regStyles.imageBg}
+        source={require("../../../assets/photo_bg.png")}
+        >
+            <TouchableWithoutFeedback onPress={hideKeyboard}>
                     <KeyboardAvoidingView 
                         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                         style={{flex: 1}}
                     >
-                        <View style={logStyles.formWrap}>
+                        <View style={regStyles.formWrap}>
                             <View style={{
-                                ...logStyles.form,
+                                ...regStyles.form,
                                 paddingBottom: isKeyboardShown ? 10 : 60,
                             }}> 
+                            
+                                <View style={regStyles.userImgWrap} >
+                                    <Image style={regStyles.userImg} source={userImg} />
+                                    
+                                    <TouchableOpacity 
+                                        activeOpacity={0.8}
+                                        style={{
+                                            ...regStyles.imgSwitch,
+                                            borderColor: isImgLoaded ? "#BDBDBD" : "#FF6C00",
+                                        }}
+                                        onPress={() => setIsImgLoaded((prevState) => !prevState)}
+                                    >
+                                        <FontAwesomeIcon 
+                                            style={{color: isImgLoaded ? "#BDBDBD" : "#FF6C00"}} 
+                                            icon={ isImgLoaded ? faXmark : faPlus } 
+                                        />
+                                    </TouchableOpacity>
+                                </View>
                                 
-                                <Text style={logStyles.title}>Log in</Text>
+                                <Text style={regStyles.title}>Registration</Text>
+                                
+                                <TextInput 
+                                    onFocus={() => setIsKeyboardShown(true)}
+                                    onChangeText={(value) => {
+                                        setState((prevState) => ({ ...prevState, login: value }));
+                                    }}
+                                    placeholder='Login'
+                                    placeholderTextColor='#DDDDDD'
+                                    value={state.login}
+                                    style={regStyles.input}
+                                />
                                 
                                 <TextInput 
                                     onFocus={() => setIsKeyboardShown(true)}
@@ -61,10 +94,10 @@ const LoginScreen = ({ navigation }) => {
                                     placeholder='Email'
                                     placeholderTextColor='#DDDDDD'
                                     value={state.mail}
-                                    style={logStyles.input}
+                                    style={regStyles.input}
                                 />
                                 
-                                <View style={logStyles.passwordInpWrap}>
+                                <View style={regStyles.passwordInpWrap}>
                                     <TextInput 
                                         onFocus={() => setIsKeyboardShown(true)}
                                         onChangeText={(value) => {
@@ -75,17 +108,17 @@ const LoginScreen = ({ navigation }) => {
                                         value={state.password}
                                         secureTextEntry={!showPassword}
                                         style={{
-                                            ...logStyles.input,
-                                            ...logStyles.passwordInp
+                                            ...regStyles.input,
+                                            ...regStyles.passwordInp
                                         }}
                                     />
                                     <TouchableOpacity 
                                         activeOpacity={0.8}
-                                        style={logStyles.showPasswBtn}
+                                        style={regStyles.showPasswBtn}
                                         onPress={() => setShowPassword((prevState) => !prevState)}
                                     >
                                         <FontAwesomeIcon 
-                                            style={logStyles.showPasswBtnSvg} 
+                                            style={regStyles.showPasswBtnSvg} 
                                             icon={ showPassword ? faEyeSlash : faEye } 
                                         />
                                     </TouchableOpacity>
@@ -93,25 +126,25 @@ const LoginScreen = ({ navigation }) => {
 
                                 <TouchableOpacity 
                                     activeOpacity={0.8}
-                                    style={logStyles.primButton}
+                                    style={regStyles.primButton}
                                     onPress={submitHandler}
                                 >
-                                    <Text style={logStyles.buttonTxt}>Sign in</Text>
+                                    <Text style={regStyles.buttonTxt}>Sign up</Text>
                                 </TouchableOpacity>
 
                                 <TouchableOpacity 
                                     activeOpacity={0.8}
-                                    style={logStyles.secButton}
-                                    onPress={() => navigation.navigate("Registration")}
+                                    style={regStyles.secButton}
+                                    onPress={() => navigation.navigate("Login")}
                                 >
-                                    <Text>Don't have an account? Register</Text>
+                                    <Text>Already have an account? Sign in</Text>
                                 </TouchableOpacity>
                             </View>
                         </View> 
                     </KeyboardAvoidingView>
-                </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback>
         </ImageBackground>
     );
 }
 
-export default LoginScreen;
+export default RegistrationScreen;
