@@ -83,7 +83,8 @@ export const useRoute = (isAuth) => {
         options={{
           tabBarIcon: ({focused, size, color}) => (
             <Feather name="user" size={size} color={color} />
-          )
+          ),
+          headerShown: false
         }}
         />
       </MainTab.Navigator>
