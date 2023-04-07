@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { regStyles } from './RegistrationScreenStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faPlus, faXmark, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { useApp } from '../../../hooks/useContext';
 import { 
     Text,
     View,
@@ -26,6 +27,7 @@ const RegistrationScreen = ({ navigation }) => {
     const [isImgLoaded, setIsImgLoaded] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [state, setState] = useState(initState);
+    const { registerUser } = useApp();
 
     const hideKeyboard = () => {
         setIsKeyboardShown(false);
@@ -34,7 +36,8 @@ const RegistrationScreen = ({ navigation }) => {
 
     const submitHandler = () => {
         hideKeyboard();
-        console.log(state);
+        const {login, password, mail} = state;
+        registerUser(login, password, mail);
         setState(initState);
     }
 

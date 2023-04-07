@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { logStyles } from './LoginScreenStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { useApp } from '../../../hooks/useContext';
 import { 
     Text,
     View,
@@ -23,6 +24,7 @@ const LoginScreen = ({ navigation }) => {
     const [isKeyboardShown, setIsKeyboardShown] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [state, setState] = useState(initState);
+    const { loginUser } = useApp();
 
     const hideKeyboard = () => {
         setIsKeyboardShown(false);
@@ -31,7 +33,8 @@ const LoginScreen = ({ navigation }) => {
 
     const submitHandler = () => {
         hideKeyboard();
-        console.log(state);
+        const {mail, password } = state;
+        loginUser(mail, password);
         setState(initState);
     }
 
