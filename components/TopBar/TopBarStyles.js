@@ -9,6 +9,10 @@ export const topBarStyles = StyleSheet.create({
         paddingTop: 50,
         paddingBottom: 15,
         paddingHorizontal: 20,
+        borderColor: '#eeeeee',
+        borderStyle: 'solid',
+        borderWidth: 0,
+        borderBottomWidth: 1 
     },
     text: {
         fontWeight: 500,

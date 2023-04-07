@@ -48,6 +48,10 @@ export const useRoute = (isAuth) => {
           height: 40,
         },
         tabBarStyle: {
+          borderColor: '#eeeeee',
+          borderStyle: 'solid',
+          borderWidth: 0,
+          borderTopWidth: 1,
           justifyContent: 'center',
           alignItems: 'center',
           padding: 10,
@@ -65,7 +69,7 @@ export const useRoute = (isAuth) => {
         options={{
           tabBarIcon: ({focused, size, color}) => (
             <Feather name="grid" size={size} color={color} />
-          )
+          ),
         }}
         />
         <MainTab.Screen 

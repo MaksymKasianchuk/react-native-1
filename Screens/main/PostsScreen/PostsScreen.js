@@ -1,3 +1,4 @@
+import PostList from '../../../components/PostList';
 import { 
     Text,
     View,
@@ -5,10 +6,8 @@ import {
 
 const PostsScreen = () => {
     return (
-        <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
-            <Text>
-                PostsScreen
-            </Text>
+        <View style={{flex:1}}>
+          <PostList />
         </View>
     )
 }
