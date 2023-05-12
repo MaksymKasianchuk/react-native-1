@@ -1,8 +1,5 @@
 import PostList from '../../../components/PostList';
-import { 
-    Text,
-    View,
-} from 'react-native';
+import { View } from 'react-native';
 
 const PostsScreen = () => {
     return (
