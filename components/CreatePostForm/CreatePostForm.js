@@ -58,7 +58,7 @@ const CreatePostForm = () => {
                 >
                     <View style={{
                         ...createPost.formFields,
-                        marginTop: isKeyboardShown ? -200 : 0,
+                        marginTop: isKeyboardShown ? -100 : 0,
                     }}>
 
                         {/* IMAGE */}

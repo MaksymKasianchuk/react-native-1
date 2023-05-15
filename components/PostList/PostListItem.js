@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { postListStyles } from './PostListStyles';
 import { 
     Text,
@@ -14,6 +15,7 @@ const PostListItem = ({ item }) => {
     const firstRender = useRef(true);
     const {name, mail, avatar, thumbnail, postTitle, comments, likes, location} = item;
     const [ countedLikes, setCountedLikes ] = useState(likes);
+    const navigation = useNavigation();
 
     useEffect(()=>{
         if(firstRender.current){
@@ -69,10 +71,19 @@ const PostListItem = ({ item }) => {
                     <View style={postListStyles.metaLeft}>
 
                         {/* Post Comments */}
-                        <View style={postListStyles.metaItem}>
+                        <TouchableOpacity 
+                            activeOpacity={0.8}
+                            style={postListStyles.metaItem} 
+                            onPress={()=>{
+                                navigation.navigate('Home', {
+                                    screen: 'Comments',
+                                    params: { thumbnail },
+                                });
+                            }}
+                        >
                             <EvilIcons name="comment" size={24} style={postListStyles.metaIcon}/>
                             <Text style={postListStyles.metaComments}>{comments}</Text>
-                        </View>
+                        </TouchableOpacity>
 
                         {/* Post Likes */}
                         <TouchableOpacity 

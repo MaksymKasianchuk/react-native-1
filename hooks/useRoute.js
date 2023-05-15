@@ -1,4 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather, Entypo } from '@expo/vector-icons';
 
@@ -8,7 +9,9 @@ import CreatePostsScreen from "../Screens/main/CreatePostsScreen";
 import ProfileScreen from "../Screens/main/ProfileScreen";
 import RegistrationScreen from "../Screens/auth/RegistrationScreen";
 import LoginScreen from "../Screens/auth/LoginScreen";
+import CommentsScreen from "../Screens/main/CommentsScreen";
 
+const Stack = createStackNavigator();
 
 const AuthStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
@@ -64,9 +67,10 @@ export const useRoute = (isAuth) => {
       
       >
         <MainTab.Screen 
-        name="Posts" 
-        component={PostsScreen} 
+        name="Home" 
+        component={Home} 
         options={{
+          headerShown: false,
           tabBarIcon: ({focused, size, color}) => (
             <Feather name="grid" size={size} color={color} />
           ),
@@ -76,6 +80,7 @@ export const useRoute = (isAuth) => {
         name="Create post" 
         component={CreatePostsScreen}
         options={{
+          tabBarHideOnKeyboard: true,
           tabBarIcon: ({focused, size, color}) => (
             <Entypo name="plus" size={size} color={color} />
           )
@@ -93,4 +98,23 @@ export const useRoute = (isAuth) => {
         />
       </MainTab.Navigator>
     )
+}
+
+function Home() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        header: ({ navigation, route, options }) => {        
+          return <TopBar navigation={navigation} route={route}/>;
+        }
+      }}
+    >
+      <Stack.Screen name="Posts" component={PostsScreen}
+        options={{
+          // headerShown: false
+        }}
+      />
+      <Stack.Screen name="Comments" component={CommentsScreen} />
+    </Stack.Navigator>
+  );
 }
