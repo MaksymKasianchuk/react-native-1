@@ -27,5 +27,11 @@ export const topBarStyles = StyleSheet.create({
     },
     logOutIcon: {
         color: '#BDBDBD',
-    }
+    },
+    goBack: {
+        position: 'absolute',
+        top: 50,
+        left: 20,
+    },
+
 });

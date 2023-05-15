@@ -40,37 +40,35 @@ export const useRoute = (isAuth) => {
     }
     return(
       <MainTab.Navigator 
-      screenOptions={{
-        tabBarShowLabel: false,
-        tabBarActiveTintColor: '#fff',
-        tabBarInactiveTintColor: '#212121',
-        tabBarActiveBackgroundColor: '#FF6C00',
-        tabBarItemStyle: {
-          borderRadius: 100,
-          maxWidth: 70,
-          height: 40,
-        },
-        tabBarStyle: {
-          borderColor: '#eeeeee',
-          borderStyle: 'solid',
-          borderWidth: 0,
-          borderTopWidth: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-          padding: 10,
-          height: 60
-        },
-        header: ({ navigation, route, options }) => {        
-          return <TopBar navigation={navigation} route={route}/>;
-        }
-      }}
-      
+        screenOptions={{
+          tabBarShowLabel: false,
+          tabBarActiveTintColor: '#fff',
+          tabBarInactiveTintColor: '#212121',
+          tabBarActiveBackgroundColor: '#FF6C00',
+          tabBarItemStyle: {
+            borderRadius: 100,
+            maxWidth: 70,
+            height: 40,
+          },
+          tabBarStyle: {
+            borderColor: '#eeeeee',
+            borderStyle: 'solid',
+            borderWidth: 0,
+            borderTopWidth: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: 10,
+            height: 60
+          },
+        }}
+        initialRouteName="Home"
       >
         <MainTab.Screen 
         name="Home" 
         component={Home} 
         options={{
           headerShown: false,
+          tabBarHideOnKeyboard: true,
           tabBarIcon: ({focused, size, color}) => (
             <Feather name="grid" size={size} color={color} />
           ),
@@ -83,7 +81,10 @@ export const useRoute = (isAuth) => {
           tabBarHideOnKeyboard: true,
           tabBarIcon: ({focused, size, color}) => (
             <Entypo name="plus" size={size} color={color} />
-          )
+          ),
+          header: ({ navigation, route, options }) => {        
+            return <TopBar navigation={navigation} route={route} backToPrev/>;
+          }
         }}
         />
         <MainTab.Screen 
@@ -102,19 +103,21 @@ export const useRoute = (isAuth) => {
 
 function Home() {
   return (
-    <Stack.Navigator
-      screenOptions={{
-        header: ({ navigation, route, options }) => {        
-          return <TopBar navigation={navigation} route={route}/>;
-        }
-      }}
-    >
+    <Stack.Navigator initialRouteName="Posts">
       <Stack.Screen name="Posts" component={PostsScreen}
         options={{
-          // headerShown: false
+          header: ({ navigation, route, options }) => {        
+            return <TopBar navigation={navigation} route={route}/>;
+          }
         }}
       />
-      <Stack.Screen name="Comments" component={CommentsScreen} />
+      <Stack.Screen name="Comments" component={CommentsScreen}
+        options={{
+          header: ({ navigation, route, options }) => {        
+            return <TopBar navigation={navigation} route={route} backToPrev/>;
+          }
+        }}
+      />
     </Stack.Navigator>
   );
 }
