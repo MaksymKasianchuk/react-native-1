@@ -15,11 +15,20 @@ const TopBar = ({ navigation, route, backToPrev=false }) => {
           </TouchableOpacity>
         )}
 
+        {route.name === 'Comments' && (
+          <TouchableOpacity style={topBarStyles.goBack} onPress={() => {  navigation.navigate('Home', {
+            screen: 'Posts',
+            params: {  },
+          }); }} activeOpacity={0.8}> 
+            <AntDesign name="arrowleft" size={24} color={topBarStyles.goBackIcon} />
+          </TouchableOpacity>
+        )}
+
         <View>
           <Text style={topBarStyles.text}>{route.name}</Text>
         </View>
 
-        {!backToPrev && (
+        {(!backToPrev && route.name !== "Comments") && (
           <TouchableOpacity style={topBarStyles.logOut} onPress={() => { logOut() }} activeOpacity={0.8}> 
             <MaterialIcons name="logout" size={24} style={topBarStyles.logOutIcon} />
           </TouchableOpacity>

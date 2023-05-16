@@ -56,7 +56,7 @@ const CommentsScreen = ({ route }) => {
                             
                     {/* Send comment form */}
                     <View style={{...commentsScreenStyles.sendForm, 
-                        paddingBottom: isKeyboardShown ? 100 : 10,
+                        paddingBottom: isKeyboardShown ? 40 : 10,
                     }}>
                         <TextInput 
                             onFocus={() => setIsKeyboardShown(true)}

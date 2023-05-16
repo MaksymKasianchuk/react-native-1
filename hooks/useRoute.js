@@ -1,5 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
-// import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather, Entypo } from '@expo/vector-icons';
 
@@ -11,7 +11,18 @@ import RegistrationScreen from "../Screens/auth/RegistrationScreen";
 import LoginScreen from "../Screens/auth/LoginScreen";
 import CommentsScreen from "../Screens/main/CommentsScreen";
 
-const Stack = createStackNavigator();
+const bottomTabsStyle =  {
+  borderColor: '#eeeeee',
+  borderStyle: 'solid',
+  borderWidth: 0,
+  borderTopWidth: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: 10,
+  height: 60
+};
+
+const HomeStack = createStackNavigator();
 
 const AuthStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
@@ -50,29 +61,26 @@ export const useRoute = (isAuth) => {
             maxWidth: 70,
             height: 40,
           },
-          tabBarStyle: {
-            borderColor: '#eeeeee',
-            borderStyle: 'solid',
-            borderWidth: 0,
-            borderTopWidth: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: 10,
-            height: 60
-          },
+          tabBarStyle: bottomTabsStyle,
         }}
         initialRouteName="Home"
       >
         <MainTab.Screen 
         name="Home" 
         component={Home} 
-        options={{
+        options={({ route }) => ({
           headerShown: false,
-          tabBarHideOnKeyboard: true,
+          tabBarStyle: ((route) => {
+            const routeName = getFocusedRouteNameFromRoute(route) ?? ""
+            if (routeName === 'Comments') {
+              return { display: "none" }
+            }
+            return bottomTabsStyle;
+          })(route),
           tabBarIcon: ({focused, size, color}) => (
             <Feather name="grid" size={size} color={color} />
           ),
-        }}
+        })}
         />
         <MainTab.Screen 
         name="Create post" 
@@ -103,21 +111,21 @@ export const useRoute = (isAuth) => {
 
 function Home() {
   return (
-    <Stack.Navigator initialRouteName="Posts">
-      <Stack.Screen name="Posts" component={PostsScreen}
+    <HomeStack.Navigator initialRouteName="Posts">
+      <HomeStack.Screen name="Posts" component={PostsScreen}
         options={{
           header: ({ navigation, route, options }) => {        
             return <TopBar navigation={navigation} route={route}/>;
           }
         }}
       />
-      <Stack.Screen name="Comments" component={CommentsScreen}
+      <HomeStack.Screen name="Comments" component={CommentsScreen}
         options={{
           header: ({ navigation, route, options }) => {        
-            return <TopBar navigation={navigation} route={route} backToPrev/>;
+            return <TopBar navigation={navigation} route={route}/>;
           }
         }}
       />
-    </Stack.Navigator>
+    </HomeStack.Navigator>
   );
 }
