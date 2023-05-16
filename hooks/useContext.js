@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState } from "react";
 
 const AppContext = createContext();
 
@@ -10,13 +10,13 @@ export const AppProvider = ({ children }) => {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
 
-    const loginUser = ({email, password}) => {
+    const loginUser = (email, password) => {
         setEmail(email);
         setPassword(password);
         setIsAuth(true);
     };
 
-    const registerUser = ({login, password, email}) => {
+    const registerUser = (login, password, email) => {
         setLogin(login);
         setEmail(email);
         setPassword(password);
