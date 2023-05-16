@@ -1,10 +1,11 @@
 import PostList from '../../../components/PostList';
 import { View } from 'react-native';
+import { somePosts } from '../../../constants/somePosts';
 
 const PostsScreen = () => {
     return (
         <View style={{flex:1}}>
-          <PostList />
+          <PostList posts={somePosts} />
         </View>
     )
 }

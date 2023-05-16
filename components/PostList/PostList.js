@@ -1,5 +1,4 @@
 import PostListItem from './PostListItem';
-import { somePosts } from '../../constants/somePosts';
 import { postListStyles } from './PostListStyles';
 import { 
     SafeAreaView,
@@ -8,12 +7,12 @@ import {
 } from 'react-native';
 
 
-const PostList = () => {
+const PostList = ({ posts }) => {
     return (
         <View style={postListStyles.postListWrap}>
             <SafeAreaView>
                 <FlatList
-                    data={somePosts}
+                    data={posts}
                     renderItem={({item}) => <PostListItem item={item}/>}
                     keyExtractor={item => item.id}
                 />
