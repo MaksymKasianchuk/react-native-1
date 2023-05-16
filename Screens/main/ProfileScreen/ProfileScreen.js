@@ -2,6 +2,7 @@ import PostListItem from '../../../components/PostList/PostListItem';
 import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { profileScreenStyles } from './ProfileScreenStyles';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useApp } from "../../../hooks/useContext";
 import { somePosts } from '../../../constants/somePosts';
@@ -24,15 +25,15 @@ const ProfileScreen = () => {
     const userImg = isImgLoaded ? require("../../../assets/user.png") : require("../../../assets/emptyUser.png");
     return (
         <ImageBackground 
-        style={{flex: 1}}
+        style={profileScreenStyles.imageBackground}
         source={require("../../../assets/photo_bg.png")}
         >
-              <ScrollView style={{}}>
+              <ScrollView style={profileScreenStyles.scrollView}>
                     <SafeAreaView style={{flex: 1}}>
-                        <View>
+                        <View style={profileScreenStyles.content}>
                             
                             {/* HEADER */}
-                            <View>
+                            <View style={profileScreenStyles.header}>
                                 {/* HEADER AVATAR*/}
                                 <View style={{}} >
                                     <Image style={{}} source={userImg} />
