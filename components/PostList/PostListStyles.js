@@ -54,6 +54,7 @@ export const postListStyles = StyleSheet.create({
         color: '#212121',
     },
     metaWrap: {
+        marginTop: 10,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between'
@@ -65,23 +66,25 @@ export const postListStyles = StyleSheet.create({
     metaItem: {
         flexDirection: 'row',
         alignItems: 'center',
+        flexShrink: 1
     },
     metaIcon: {
         color: '#BDBDBD',
     },
     metaComments: {
         color: '#BDBDBD',
-        paddingRight: 20
+        paddingRight: 15
     },
     metaLikes: {
         color: '#BDBDBD',
-        paddingRight: 20
+        paddingRight: 15
     },
     metaLocation: {
         fontWeight: 400,
         fontSize: 16,
         lineHeight: 19,       
         color: '#212121',
+        flexShrink: 1
     }
 
 });

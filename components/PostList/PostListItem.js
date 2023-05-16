@@ -11,11 +11,15 @@ import {
 import { EvilIcons } from '@expo/vector-icons'; 
 
 const PostListItem = ({ item }) => {
-    const [ isLiked, setIsLiked ] = useState(false);
-    const firstRender = useRef(true);
     const {name, mail, avatar, thumbnail, postTitle, comments, likes, location} = item;
+    const firstRender = useRef(true);
+    
+    const [ isLiked, setIsLiked ] = useState(false);
+    const [ dimensions, setdimensions ] = useState( Dimensions.get("window").width - 30 );
     const [ countedLikes, setCountedLikes ] = useState(likes);
     const navigation = useNavigation();
+    
+    const imageHeight = Math.round(dimensions * 9 / 16);
 
     useEffect(()=>{
         if(firstRender.current){
@@ -29,9 +33,18 @@ const PostListItem = ({ item }) => {
         }
     }, [isLiked]);
 
-    const dimensions = Dimensions.get('window');
-    const imageHeight = Math.round(dimensions.width * 9 / 16);
-    const imageWidth = dimensions.width - 30;
+    useEffect(() => {
+        const onChange = () => {
+            const width = Dimensions.get("window").width - 30;
+        
+            setdimensions(width);
+        };
+        Dimensions.addEventListener("change", onChange);
+        return () => {
+            Dimensions.removeEventListener("change", onChange);
+        };
+    }, []);
+
     return (
         <View style={postListStyles.item}>
             {/* Post Header */}
@@ -46,14 +59,14 @@ const PostListItem = ({ item }) => {
             </View>
 
             {/* Post Body */}
-            <View>
+            <View style={{flex: 1}}>
                 {/* Post Thumbnail */}
                 <TouchableOpacity activeOpacity={0.8}>
                     <Image 
                         style={
                             {
                                 ...postListStyles.thumb, 
-                                width: imageWidth, 
+                                width: dimensions, 
                                 height: imageHeight
                             }
                         } 

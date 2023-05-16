@@ -38,15 +38,3 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
   },
 });
-
-  // const [dimensions, setDimentions] = useState(false);
-
-  // useEffect(() => {
-  //   const onChange = () => {
-  //     setDimentions((prev)=> !prev);
-  //   }
-  //   Dimensions.addEventListener("change", onChange);
-  //   return (() => {
-  //     Dimensions.removeEventListener("change", onChange);
-  //   });
-  // }, []);

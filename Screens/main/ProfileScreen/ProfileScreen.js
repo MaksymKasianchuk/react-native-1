@@ -29,19 +29,19 @@ const ProfileScreen = () => {
         source={require("../../../assets/photo_bg.png")}
         >
               <ScrollView style={profileScreenStyles.scrollView}>
-                    <SafeAreaView style={{flex: 1}}>
+                    <SafeAreaView style={profileScreenStyles.contentWrap}>
                         <View style={profileScreenStyles.content}>
                             
                             {/* HEADER */}
                             <View style={profileScreenStyles.header}>
                                 {/* HEADER AVATAR*/}
-                                <View style={{}} >
-                                    <Image style={{}} source={userImg} />
+                                <View style={profileScreenStyles.userImgWrap} >
+                                    <Image style={profileScreenStyles.userImg} source={userImg} />
                                     
                                     <TouchableOpacity 
                                         activeOpacity={0.8}
                                         style={{
-                                            ...{},
+                                            ...profileScreenStyles.imgSwitch,
                                             borderColor: isImgLoaded ? "#BDBDBD" : "#FF6C00",
                                         }}
                                         onPress={() => setIsImgLoaded((prevState) => !prevState)}
@@ -54,17 +54,17 @@ const ProfileScreen = () => {
                                 </View>
                                 
                                 {/* HEADER LogOut*/}
-                                <TouchableOpacity style={{}} onPress={() => { logOut() }} activeOpacity={0.8}> 
-                                    <MaterialIcons name="logout" size={24} style={{}} />
+                                <TouchableOpacity style={profileScreenStyles.logOut} onPress={() => { logOut() }} activeOpacity={0.8}> 
+                                    <MaterialIcons name="logout" size={24} style={profileScreenStyles.logOutIcon} />
                                 </TouchableOpacity>
 
                                 {/* HEADER User name*/}
-                                <Text style={{}}>{login}</Text>
+                                <Text style={profileScreenStyles.name}>{login}</Text>
                             </View>
                             
                             {/* Comments List */}
                             <Pressable style={{ flex: 1}}>
-                                <View>
+                                <View style={profileScreenStyles.postsList}>
                                     {somePosts.map((item) => (
                                         <PostListItem key={item.id} item={item} />
                                     ))}
