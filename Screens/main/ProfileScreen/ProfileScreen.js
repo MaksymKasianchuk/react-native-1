@@ -1,5 +1,5 @@
 import PostListItem from '../../../components/PostList/PostListItem';
-import { useState } from "react";
+import ImageBg from '../../../components/ImageBg';
 import UserAvetar from "../../../components/UserAvatar";
 import { profileScreenStyles } from './ProfileScreenStyles';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -12,7 +12,6 @@ import {
     Pressable,
     Text,
     SafeAreaView,
-    ImageBackground
 } from 'react-native';
 
 const ProfileScreen = () => {
@@ -20,44 +19,41 @@ const ProfileScreen = () => {
     const { login } = getUserInfo();
 
     return (
-        <ImageBackground 
-        style={profileScreenStyles.imageBackground}
-        source={require("../../../assets/photo_bg.png")}
-        >
-              <ScrollView style={profileScreenStyles.scrollView}>
-                    <SafeAreaView style={profileScreenStyles.contentWrap}>
-                        <View style={profileScreenStyles.content}>
-                            
-                            {/* HEADER */}
-                            <View style={profileScreenStyles.header}>
-                                {/* HEADER AVATAR*/}
-                                <View style={profileScreenStyles.avatarWrap}>
-                                    <UserAvetar />
-                                </View>
-                                
-                                {/* HEADER LogOut*/}
-                                <TouchableOpacity style={profileScreenStyles.logOut} onPress={() => { logOut() }} activeOpacity={0.8}> 
-                                    <MaterialIcons name="logout" size={24} style={profileScreenStyles.logOutIcon} />
-                                </TouchableOpacity>
-
-                                {/* HEADER User name*/}
-                                <Text style={profileScreenStyles.name}>{login}</Text>
+        <ImageBg>
+            <ScrollView style={profileScreenStyles.scrollView}>
+                <SafeAreaView style={profileScreenStyles.contentWrap}>
+                    <View style={profileScreenStyles.content}>
+                      
+                        {/* HEADER */}
+                        <View style={profileScreenStyles.header}>
+                            {/* HEADER AVATAR*/}
+                            <View style={profileScreenStyles.avatarWrap}>
+                                <UserAvetar />
                             </View>
                             
-                            {/* Comments List */}
-                            <Pressable style={{ flex: 1}}>
-                                <View style={profileScreenStyles.postsList}>
-                                    {myPosts.map((item) => (
-                                        <PostListItem key={item.id} item={item} />
-                                    ))}
-                                </View>
-                            </Pressable>
-
+                            {/* HEADER LogOut*/}
+                            <TouchableOpacity style={profileScreenStyles.logOut} onPress={() => { logOut() }} activeOpacity={0.8}> 
+                                <MaterialIcons name="logout" size={24} style={profileScreenStyles.logOutIcon} />
+                            </TouchableOpacity>
+                            
+                            {/* HEADER User name*/}
+                            <Text style={profileScreenStyles.name}>{login ? login : "User Name"}</Text>
                         </View>
-                    </SafeAreaView>
-              </ScrollView>
-        </ImageBackground>
-    )
+                        
+                        {/* Comments List */}
+                        <Pressable style={{ flex: 1}}>
+                            <View style={profileScreenStyles.postsList}>
+                                {myPosts.map((item) => (
+                                    <PostListItem key={item.id} item={item} />
+                                ))}
+                            </View>
+                        </Pressable>
+                                  
+                    </View>
+                </SafeAreaView>
+            </ScrollView>
+        </ImageBg>
+    );
 }
 
 export default ProfileScreen;

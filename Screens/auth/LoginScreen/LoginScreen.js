@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PrimaryButton from '../../../components/PrimaryButton';
+import ImageBg from '../../../components/ImageBg';
 import { logStyles } from './LoginScreenStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
@@ -13,7 +14,6 @@ import {
     KeyboardAvoidingView,
     Keyboard,
     TouchableWithoutFeedback,
-    ImageBackground,
 } from 'react-native';
 
 const initState = {
@@ -40,75 +40,72 @@ const LoginScreen = ({ navigation }) => {
     }
 
     return (
-        <ImageBackground 
-                style={logStyles.imageBg}
-                source={require("../../../assets/photo_bg.png")}
-            >
-                <TouchableWithoutFeedback onPress={hideKeyboard}>
-                    <KeyboardAvoidingView 
-                        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-                        style={{flex: 1}}
-                    >
-                        <View style={logStyles.formWrap}>
-                            <View style={{
-                                ...logStyles.form,
-                                paddingBottom: isKeyboardShown ? 10 : 60,
-                            }}> 
-                                
-                                <Text style={logStyles.title}>Log in</Text>
-                                
+        <ImageBg>
+            <TouchableWithoutFeedback onPress={hideKeyboard}>
+                <KeyboardAvoidingView 
+                    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                    style={{flex: 1}}
+                >
+                    <View style={logStyles.formWrap}>
+                        <View style={{
+                            ...logStyles.form,
+                            paddingBottom: isKeyboardShown ? 10 : 60,
+                        }}> 
+                            
+                            <Text style={logStyles.title}>Log in</Text>
+                            
+                            <TextInput 
+                                onFocus={() => setIsKeyboardShown(true)}
+                                onChangeText={(value) => {
+                                    setState((prevState) => ({ ...prevState, mail: value }));
+                                }}
+                                placeholder='Email'
+                                placeholderTextColor='#DDDDDD'
+                                value={state.mail}
+                                style={logStyles.input}
+                            />
+                            
+                            <View style={logStyles.passwordInpWrap}>
                                 <TextInput 
                                     onFocus={() => setIsKeyboardShown(true)}
                                     onChangeText={(value) => {
-                                        setState((prevState) => ({ ...prevState, mail: value }));
+                                        setState((prevState) => ({ ...prevState, password: value }));
                                     }}
-                                    placeholder='Email'
+                                    placeholder='Password'
                                     placeholderTextColor='#DDDDDD'
-                                    value={state.mail}
-                                    style={logStyles.input}
+                                    value={state.password}
+                                    secureTextEntry={!showPassword}
+                                    style={{
+                                        ...logStyles.input,
+                                        ...logStyles.passwordInp
+                                    }}
                                 />
-                                
-                                <View style={logStyles.passwordInpWrap}>
-                                    <TextInput 
-                                        onFocus={() => setIsKeyboardShown(true)}
-                                        onChangeText={(value) => {
-                                            setState((prevState) => ({ ...prevState, password: value }));
-                                        }}
-                                        placeholder='Password'
-                                        placeholderTextColor='#DDDDDD'
-                                        value={state.password}
-                                        secureTextEntry={!showPassword}
-                                        style={{
-                                            ...logStyles.input,
-                                            ...logStyles.passwordInp
-                                        }}
-                                    />
-                                    <TouchableOpacity 
-                                        activeOpacity={0.8}
-                                        style={logStyles.showPasswBtn}
-                                        onPress={() => setShowPassword((prevState) => !prevState)}
-                                    >
-                                        <FontAwesomeIcon 
-                                            style={logStyles.showPasswBtnSvg} 
-                                            icon={ showPassword ? faEyeSlash : faEye } 
-                                        />
-                                    </TouchableOpacity>
-                                </View>
-
-                                <PrimaryButton text="Sign in" handler={submitHandler} />
-
                                 <TouchableOpacity 
                                     activeOpacity={0.8}
-                                    style={logStyles.secButton}
-                                    onPress={() => navigation.navigate("Registration")}
+                                    style={logStyles.showPasswBtn}
+                                    onPress={() => setShowPassword((prevState) => !prevState)}
                                 >
-                                    <Text>Don't have an account? Register</Text>
+                                    <FontAwesomeIcon 
+                                        style={logStyles.showPasswBtnSvg} 
+                                        icon={ showPassword ? faEyeSlash : faEye } 
+                                    />
                                 </TouchableOpacity>
                             </View>
-                        </View> 
-                    </KeyboardAvoidingView>
-                </TouchableWithoutFeedback>
-        </ImageBackground>
+                                    
+                            <PrimaryButton text="Sign in" handler={submitHandler} />
+            
+                            <TouchableOpacity 
+                                activeOpacity={0.8}
+                                style={logStyles.secButton}
+                                onPress={() => navigation.navigate("Registration")}
+                            >
+                                <Text>Don't have an account? Register</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View> 
+                </KeyboardAvoidingView>
+            </TouchableWithoutFeedback>
+        </ImageBg>
     );
 }
 

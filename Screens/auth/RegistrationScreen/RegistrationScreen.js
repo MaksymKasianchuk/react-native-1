@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PrimaryButton from '../../../components/PrimaryButton';
+import ImageBg from '../../../components/ImageBg';
 import UserAvetar from "../../../components/UserAvatar";
 import { regStyles } from './RegistrationScreenStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -14,7 +15,6 @@ import {
     KeyboardAvoidingView,
     Keyboard,
     TouchableWithoutFeedback,
-    ImageBackground,
 } from 'react-native';
 
 const initState = {
@@ -42,10 +42,7 @@ const RegistrationScreen = ({ navigation }) => {
     }
 
     return (
-        <ImageBackground 
-        style={regStyles.imageBg}
-        source={require("../../../assets/photo_bg.png")}
-        >
+        <ImageBg>
             <TouchableWithoutFeedback onPress={hideKeyboard}>
                     <KeyboardAvoidingView 
                         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -125,7 +122,7 @@ const RegistrationScreen = ({ navigation }) => {
                         </View> 
                     </KeyboardAvoidingView>
             </TouchableWithoutFeedback>
-        </ImageBackground>
+        </ImageBg>
     );
 }
 

@@ -22,8 +22,13 @@ export const topBarStyles = StyleSheet.create({
     },
     logOut: {
         position: 'absolute',
-        top: 45,
-        right: 20,
+        top: 50,
+        right: 10,
+        width: 40,
+        height: 40,
+        alignItems: "center",
+        justifyContent: "center",
+        transform: [{translateX: 0}, {translateY: -8}],
     },
     logOutIcon: {
         color: '#BDBDBD',
@@ -31,7 +36,12 @@ export const topBarStyles = StyleSheet.create({
     goBack: {
         position: 'absolute',
         top: 50,
-        left: 20,
+        left: 5,
+        width: 40,
+        height: 40,
+        alignItems: "center",
+        justifyContent: "center",
+        transform: [{translateX: 0}, {translateY: -8}],
     },
 
 });

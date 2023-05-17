@@ -20,7 +20,7 @@ export const profileScreenStyles = StyleSheet.create({
     },
     header: {
         position: 'relative',
-        paddingTop: 70,
+        paddingTop: 80,
         paddingBottom: 30
     },
     avatarWrap: {
