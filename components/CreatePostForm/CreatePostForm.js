@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { createPost } from './CreatePostFormStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { EvilIcons } from '@expo/vector-icons'; 
-import { faCamera } from "@fortawesome/free-solid-svg-icons";
+import { faCamera, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { 
     Text,
     View,
@@ -50,6 +50,13 @@ const CreatePostForm = () => {
             setIsSubmitDisabled(true);
         };
     };
+    
+    const resetForm = () => {
+        hideKeyboard();
+        setState(initState);
+        setIsImgLoaded(false);
+        setIsSubmitDisabled(true);
+    }
 
     return (
         <View style={createPost.form}>
@@ -60,9 +67,10 @@ const CreatePostForm = () => {
                 >
                     <View style={{
                         ...createPost.formFields,
-                        marginTop: isKeyboardShown ? -100 : 0,
+                        marginTop: isKeyboardShown ? -120 : 0,
+                        paddingBottom: isKeyboardShown ? 100 : 30,
                     }}>
-
+                        <View style={createPost.formFieldsTop}>
                         {/* IMAGE */}
                         <View style={createPost.loadImgWrap} >
                             <Image style={createPost.loadImage} source={loadImg} />
@@ -86,6 +94,7 @@ const CreatePostForm = () => {
                                 />
                             </TouchableOpacity>
                         </View>
+
                         <Text style={createPost.loadImgText}>
                             {isImgLoaded ? "Edit photo" : "Load photo"}
                         </Text>
@@ -130,6 +139,18 @@ const CreatePostForm = () => {
 
                         {/* CREATE POST BTN */}
                         <PrimaryButton text="Publish" handler={submitHandler} disabled={isSubmitDisabled} />
+                        </View>
+
+                        {/*RESET FORM BTN */}
+                        <View style={createPost.resetBtnWrap}>
+                            <TouchableOpacity 
+                                activeOpacity={0.8}
+                                style={createPost.resetBtn}
+                                onPress={resetForm}
+                            >
+                                <FontAwesomeIcon style={createPost.resetBtnIcon} icon={ faTrashAlt } />
+                            </TouchableOpacity>
+                        </View>
                     </View>
                     
                 </KeyboardAvoidingView>

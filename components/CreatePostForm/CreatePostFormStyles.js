@@ -7,8 +7,12 @@ export const createPost = StyleSheet.create({
     },
     formFields: {
         flex: 1,
-        paddingVertical: 30,
+        paddingTop: 30,
         paddingHorizontal: 15, 
+        justifyContent: 'space-between'
+    },
+    formFieldsTop: {
+        flex: 1,
     },
     loadImgWrap: {
         position: 'relative',
@@ -40,7 +44,7 @@ export const createPost = StyleSheet.create({
         color: '#BDBDBD',
     },
     loadImgText: {
-        marginTop: 8,
+        marginTop: 15,
         marginBottom: 30,
         fontFamily: 'Roboto-Regular',
         fontSize: 16,
@@ -64,5 +68,20 @@ export const createPost = StyleSheet.create({
         top: '50%',
         left: 0,
         transform: [{translateY: -8}],
+    },
+    resetBtnWrap: {
+        alignItems: 'center',
+    },
+    resetBtn: {
+        width: 70,
+        height: 40,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 100,
+        backgroundColor: "#F6F6F6",
+        paddingVertical: 8,
+    },
+    resetBtnIcon: {
+        color: '#BDBDBD',
     },
 });
