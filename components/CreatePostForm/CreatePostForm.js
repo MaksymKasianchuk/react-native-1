@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { createPost } from './CreatePostFormStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { EvilIcons } from '@expo/vector-icons'; 
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { 
     Text,
@@ -13,6 +14,7 @@ import {
     Keyboard,
     TouchableWithoutFeedback,
 } from 'react-native';
+import PrimaryButton from "../PrimaryButton";
 
 const initState = {
     name: '',
@@ -36,7 +38,7 @@ const CreatePostForm = () => {
         const {name, location} = state;
         if(name && location && isImgLoaded){
             setIsSubmitDisabled(false);
-        }
+        } 
     };
 
     const submitHandler = () => {
@@ -89,45 +91,45 @@ const CreatePostForm = () => {
                         </Text>
 
                         {/* POST NAME */}
-                        <TextInput 
-                            onFocus={() => setIsKeyboardShown(true)}
-                            onChangeText={(newName) => {
-                                setState((prevState) => ({ ...prevState, name: newName }));
-                                checkSubmitDisabled();
-                            }}
-                            placeholder='The post name'
-                            placeholderTextColor='#DDDDDD'
-                            value={state.name}
-                            style={createPost.input}
-                        />
+                        <View style={createPost.inputWrap}>
+                            <TextInput 
+                                onFocus={() => setIsKeyboardShown(true)}
+                                onChangeText={(newName) => {
+                                    setState((prevState) => ({ ...prevState, name: newName }));
+                                    checkSubmitDisabled();
+                                }}
+                                placeholder='The post name'
+                                placeholderTextColor='#DDDDDD'
+                                value={state.name}
+                                style={createPost.input}
+                            />
+                        </View>
 
                         {/* POST LOCATION */}
-                        <TextInput 
-                            onFocus={() => setIsKeyboardShown(true)}
-                            onChangeText={(newLocation) => {
-                                setState((prevState) => ({ ...prevState, location: newLocation }));
-                                checkSubmitDisabled();
-                            }}
-                            placeholder='The post name'
-                            placeholderTextColor='#DDDDDD'
-                            value={state.location}
-                            style={{
-                                ...createPost.input,
-                                marginTop: 15,
-                            }}
-                        />
+                        <View style={{
+                            ...createPost.inputWrap,
+                            marginTop: 15,
+                            marginBottom: 50
+                        }}>
+                            <TextInput 
+                                onFocus={() => setIsKeyboardShown(true)}
+                                onChangeText={(newLocation) => {
+                                    setState((prevState) => ({ ...prevState, location: newLocation }));
+                                    checkSubmitDisabled();
+                                }}
+                                placeholder='Location'
+                                placeholderTextColor='#DDDDDD'
+                                value={state.location}
+                                style={{
+                                    ...createPost.input,
+                                    paddingLeft: 25,
+                                }}
+                            />
+                            <EvilIcons name="location" size={24} style={createPost.inputIcon} />
+                        </View>
 
                         {/* CREATE POST BTN */}
-                        <TouchableOpacity 
-                            activeOpacity={0.8}
-                            style={isSubmitDisabled ? createPost.primButtonDisabled : createPost.primButton}
-                            onPress={isSubmitDisabled ? () => {} : submitHandler}
-                        >
-                            <Text style={{
-                                ...createPost.buttonTxt,
-                                color: isSubmitDisabled ? '#BDBDBD' : '#ffffff',
-                            }}>Publish</Text>
-                        </TouchableOpacity>
+                        <PrimaryButton text="Publish" handler={submitHandler} disabled={isSubmitDisabled} />
                     </View>
                     
                 </KeyboardAvoidingView>

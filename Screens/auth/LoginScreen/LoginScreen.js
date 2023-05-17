@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PrimaryButton from '../../../components/PrimaryButton';
 import { logStyles } from './LoginScreenStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
@@ -94,13 +95,7 @@ const LoginScreen = ({ navigation }) => {
                                     </TouchableOpacity>
                                 </View>
 
-                                <TouchableOpacity 
-                                    activeOpacity={0.8}
-                                    style={logStyles.primButton}
-                                    onPress={submitHandler}
-                                >
-                                    <Text style={logStyles.buttonTxt}>Sign in</Text>
-                                </TouchableOpacity>
+                                <PrimaryButton text="Sign in" handler={submitHandler} />
 
                                 <TouchableOpacity 
                                     activeOpacity={0.8}

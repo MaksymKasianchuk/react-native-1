@@ -37,30 +37,16 @@ export const logStyles = StyleSheet.create({
         borderRadius: 8,
         marginTop: 15
     },
-    primButton: {
-        borderRadius: 100,
-        justifyContent:'center',
-        alignItems: 'center',
-        padding: 16,
-        backgroundColor: '#FF6C00',
-        marginTop: 40,
-    },
     secButton: {
         marginTop: 10,
         justifyContent:'center',
         alignItems: 'center',
         padding: 16,
     },
-    buttonTxt: {
-        fontFamily: 'Roboto-Regular',
-        color: '#ffffff',
-        fontWeight: 400,
-        fontSize: 16,
-        lineHeight: 19,
-    },   
     passwordInpWrap: {
         position: "relative", 
-        marginTop: 15
+        marginTop: 15,
+        marginBottom: 40,
     },
     showPasswBtn: {
         position: 'absolute',

@@ -53,27 +53,16 @@ export const createPost = StyleSheet.create({
         borderColor: '#E8E8E8',
         borderBottomWidth: 1,
         borderStyle: 'solid',
+        position: 'relative',
     },
-    primButton: {
-        borderRadius: 100,
-        justifyContent:'center',
-        alignItems: 'center',
-        padding: 16,
-        backgroundColor: '#FF6C00',
-        marginTop: 40,
+    inputWrap: {
+        position: 'relative',
     },
-    primButtonDisabled: {
-        borderRadius: 100,
-        justifyContent:'center',
-        alignItems: 'center',
-        padding: 16,
-        backgroundColor: '#F6F6F6',
-        marginTop: 40,
-    },
-    buttonTxt: {
-        fontFamily: 'Roboto-Regular',
-        fontWeight: 400,
-        fontSize: 16,
-        lineHeight: 19,
+    inputIcon: {
+        color: '#DDDDDD',
+        position: 'absolute', 
+        top: '50%',
+        left: 0,
+        transform: [{translateY: -8}],
     },
 });

@@ -1,11 +1,10 @@
 import PostListItem from '../../../components/PostList/PostListItem';
 import { useState } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
+import UserAvetar from "../../../components/UserAvatar";
 import { profileScreenStyles } from './ProfileScreenStyles';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useApp } from "../../../hooks/useContext";
-import { somePosts } from '../../../constants/somePosts';
+import { myPosts } from '../../../constants/myPosts';
 import { 
     View,
     ScrollView,
@@ -13,16 +12,13 @@ import {
     Pressable,
     Text,
     SafeAreaView,
-    Image,
     ImageBackground
 } from 'react-native';
 
 const ProfileScreen = () => {
-    const [isImgLoaded, setIsImgLoaded] = useState(true);
     const { logOut, getUserInfo } = useApp();
     const { login } = getUserInfo();
 
-    const userImg = isImgLoaded ? require("../../../assets/user.png") : require("../../../assets/emptyUser.png");
     return (
         <ImageBackground 
         style={profileScreenStyles.imageBackground}
@@ -35,22 +31,8 @@ const ProfileScreen = () => {
                             {/* HEADER */}
                             <View style={profileScreenStyles.header}>
                                 {/* HEADER AVATAR*/}
-                                <View style={profileScreenStyles.userImgWrap} >
-                                    <Image style={profileScreenStyles.userImg} source={userImg} />
-                                    
-                                    <TouchableOpacity 
-                                        activeOpacity={0.8}
-                                        style={{
-                                            ...profileScreenStyles.imgSwitch,
-                                            borderColor: isImgLoaded ? "#BDBDBD" : "#FF6C00",
-                                        }}
-                                        onPress={() => setIsImgLoaded((prevState) => !prevState)}
-                                    >
-                                        <FontAwesomeIcon 
-                                            style={{color: isImgLoaded ? "#BDBDBD" : "#FF6C00"}} 
-                                            icon={ isImgLoaded ? faXmark : faPlus } 
-                                        />
-                                    </TouchableOpacity>
+                                <View style={profileScreenStyles.avatarWrap}>
+                                    <UserAvetar />
                                 </View>
                                 
                                 {/* HEADER LogOut*/}
@@ -65,7 +47,7 @@ const ProfileScreen = () => {
                             {/* Comments List */}
                             <Pressable style={{ flex: 1}}>
                                 <View style={profileScreenStyles.postsList}>
-                                    {somePosts.map((item) => (
+                                    {myPosts.map((item) => (
                                         <PostListItem key={item.id} item={item} />
                                     ))}
                                 </View>

@@ -1,14 +1,15 @@
 import React, { useState } from "react";
+import PrimaryButton from '../../../components/PrimaryButton';
+import UserAvetar from "../../../components/UserAvatar";
 import { regStyles } from './RegistrationScreenStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faPlus, faXmark, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useApp } from '../../../hooks/useContext';
 import { 
     Text,
     View,
     TextInput,
     TouchableOpacity,
-    Image,
     Platform,
     KeyboardAvoidingView,
     Keyboard,
@@ -24,7 +25,6 @@ const initState = {
 
 const RegistrationScreen = ({ navigation }) => {
     const [isKeyboardShown, setIsKeyboardShown] = useState(false);
-    const [isImgLoaded, setIsImgLoaded] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [state, setState] = useState(initState);
     const { registerUser } = useApp();
@@ -41,7 +41,6 @@ const RegistrationScreen = ({ navigation }) => {
         setState(initState);
     }
 
-    const userImg = isImgLoaded ? require("../../../assets/user.png") : require("../../../assets/emptyUser.png");
     return (
         <ImageBackground 
         style={regStyles.imageBg}
@@ -58,22 +57,8 @@ const RegistrationScreen = ({ navigation }) => {
                                 paddingBottom: isKeyboardShown ? 10 : 60,
                             }}> 
                             
-                                <View style={regStyles.userImgWrap} >
-                                    <Image style={regStyles.userImg} source={userImg} />
-                                    
-                                    <TouchableOpacity 
-                                        activeOpacity={0.8}
-                                        style={{
-                                            ...regStyles.imgSwitch,
-                                            borderColor: isImgLoaded ? "#BDBDBD" : "#FF6C00",
-                                        }}
-                                        onPress={() => setIsImgLoaded((prevState) => !prevState)}
-                                    >
-                                        <FontAwesomeIcon 
-                                            style={{color: isImgLoaded ? "#BDBDBD" : "#FF6C00"}} 
-                                            icon={ isImgLoaded ? faXmark : faPlus } 
-                                        />
-                                    </TouchableOpacity>
+                                <View style={regStyles.avatarWrap}>
+                                    <UserAvetar imageLoaded={false} />
                                 </View>
                                 
                                 <Text style={regStyles.title}>Registration</Text>
@@ -127,13 +112,7 @@ const RegistrationScreen = ({ navigation }) => {
                                     </TouchableOpacity>
                                 </View>
 
-                                <TouchableOpacity 
-                                    activeOpacity={0.8}
-                                    style={regStyles.primButton}
-                                    onPress={submitHandler}
-                                >
-                                    <Text style={regStyles.buttonTxt}>Sign up</Text>
-                                </TouchableOpacity>
+                                 <PrimaryButton text="Sign up" handler={submitHandler} />
 
                                 <TouchableOpacity 
                                     activeOpacity={0.8}

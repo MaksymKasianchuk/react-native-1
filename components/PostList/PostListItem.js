@@ -33,22 +33,23 @@ const PostListItem = ({ item }) => {
         }
     }, [isLiked]);
 
-    useEffect(() => {
-        const onChange = () => {
-            const width = Dimensions.get("window").width - 30;
+    // useEffect(() => {
+    //     const onChange = () => {
+    //         const width = Dimensions.get("window").width - 30;
         
-            setdimensions(width);
-        };
-        Dimensions.addEventListener("change", onChange);
-        return () => {
-            Dimensions.removeEventListener("change", onChange);
-        };
-    }, []);
+    //         setdimensions(width);
+    //     };
+    //     Dimensions.addEventListener("change", onChange);
+    //     return () => {
+    //         Dimensions.removeEventListener("change", onChange);
+    //     };
+    // }, []);
 
     return (
         <View style={postListStyles.item}>
             {/* Post Header */}
-             <View style={postListStyles.itemHeader} >
+            { name && mail && avatar && (
+            <View style={postListStyles.itemHeader} >
                 <TouchableOpacity activeOpacity={0.8}>
                     <Image style={postListStyles.avatar} source={{ uri: avatar }} />
                 </TouchableOpacity>
@@ -56,7 +57,7 @@ const PostListItem = ({ item }) => {
                     <Text style={postListStyles.name}>{name}</Text>
                     <Text style={postListStyles.mail}>{mail}</Text>
                 </View>
-            </View>
+            </View>)}
 
             {/* Post Body */}
             <View style={{flex: 1}}>
